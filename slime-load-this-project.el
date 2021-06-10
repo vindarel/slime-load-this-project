@@ -13,9 +13,15 @@
 
   The system name is inferred from the file name. This can be improved."
   (interactive)
-  (let* ((asds (f-glob "*.asd" (projectile-project-root)))
-         (system (get-system-name asds)))
-    (when (and asds
+  (let* ((root (projectile-project-root))
+         (asds (f-glob "*.asd" root))
+         system)
+    (cond
+     ((null asds)
+      (message "No .asd file found on %s" (projectile-project-root)))
+     (t
+      (setq system (get-system-name asds))
+      (when (and asds
                (yes-or-no-p (concat "Load file " (first asds) " and system " system "?"))
                (slime-load-file (first asds)))
-      (slime-load-system system))))
+      (slime-load-system system))))))
