@@ -18,10 +18,10 @@
          system)
     (cond
      ((null asds)
-      (message "No .asd file found on %s" (projectile-project-root)))
+      (message "No .asd file found on %s" root))
      (t
       (setq system (get-system-name asds))
       (when (and asds
-               (yes-or-no-p (concat "Load file " (first asds) " and system " system "?"))
-               (slime-load-file (first asds)))
-      (slime-load-system system))))))
+                 (yes-or-no-p (concat "Load file " (first asds) " and system " system "?")))
+        (slime-load-file (first asds))
+        (slime-load-system system))))))
