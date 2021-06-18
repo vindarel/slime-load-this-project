@@ -1,4 +1,7 @@
-Common Lisp utility
+SLIME utilities
+
+status: bad quality. They probably exist somewhere else.
+
 
 ## M-x slime-load-this-project
 
@@ -20,6 +23,48 @@ Another solution, but that requires one edit, is to populate
 ```
 
 or to push all projects from a directory.
+
+## M-x slime-describe-system-dependencies
+
+From a system name (a string), show its dependencies along with their description.
+
+XXX: probably something does this better already?
+
+```
+(slime-describe-system-dependencies "felonix")
+
+Dependencies of felonix:
+
+== ciel ==
+
+CIEL Is an Extended Lisp.
+
+== progressons ==
+
+Display a progress bar on one line.
+
+== termp ==
+
+Check if we are in a dumb or real terminal. Provide the termp check and a quit function.
+
+== cl-ftp ==
+
+FTP library
+
+== defclass-std ==
+
+A shortcut macro to write DEFCLASS forms quickly.
+
+== defmain ==
+
+A wrapper around net.didierverna.clon which makes command line arguments parsing easier.
+
+== cl-slug ==
+
+Small library to make slugs, mainly for URIs, from english and beyond.
+```
+
+todo: an Emacs buffer.
 
 
 ## Licence
