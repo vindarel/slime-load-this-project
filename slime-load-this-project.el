@@ -23,7 +23,15 @@
   (assert (equal (sort '("asdtest-test" "asdtest") 'sort-asd-names-predicate)
            '("asdtest" "asdtest-test"))))
 
-(defun get-asd-file (asds)
+(defun get-all-asd-files (&optional root)
+  "Return all files on the project root with a .asd extension.
+If ROOT is not supplied, get the current project root.
+Results can include the main .asd file and a .asd for tests."
+  (unless root
+    (setf root (projectile-project-root)))
+  (f-glob "*.asd" root))
+
+(defun get-main-asd-file (asds)
   "From these asd file names (strings), pick the one that is not a test definition."
   (first (sort asds 'sort-asd-names-predicate)))
 
@@ -39,14 +47,14 @@
   The system name is inferred from the file name. This can be improved."
   (interactive)
   (let* ((root (projectile-project-root))
-         (asds (f-glob "*.asd" root))
+         (asds (get-all-asd-files root))
          asd
          system)
     (cond
      ((null asds)
       (message "No .asd file found on %s" root))
      (t
-      (setq asd (get-asd-file asds))
+      (setq asd (get-main-asd-file asds))
       (setq system (get-system-name asd))                 ;; TODO: the system name inside the file can be different.
       (when (and asd
                  system
