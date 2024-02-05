@@ -1,6 +1,8 @@
 SLIME utilities
 
-status: bad quality. They probably exist somewhere else.
+status: bad quality. Doesn't always load. They probably exist somewhere else.
+
+=> <2024-02-05> exists in Sly? M-x sly-asdf-load-system. The slime command doesn't suggest my .asd system if it isn't already loaded. The Sly function looks for an .asd file in the current directory and upwards. It infers the system name from the file name, it doesn't look inside it for one or several real system names.
 
 
 ## M-x slime-load-this-project
